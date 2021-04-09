@@ -19,6 +19,7 @@ function fetchAllTasks () {
             console.log("rails obj", task)
             let t = new Task(task.id, task.name, task.description )
             console.log("js object", t)
+            t.renderTask(); 
         }
     })
 }
