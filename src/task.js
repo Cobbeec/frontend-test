@@ -1,8 +1,9 @@
 class Task {
-constructor(id, name, description) {
-    this.id 
+constructor(id, name, description, day_id) {
+    this.id = id; 
     this.name = name; 
     this.description = description; 
+    this.day_id = day_id 
 
 }
 renderTask () {
@@ -18,6 +19,6 @@ renderTask () {
 
 `
 }
-
+//rendertask is an instance method called on new instances you're making here
 
 }
