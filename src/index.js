@@ -55,10 +55,34 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(task);
         let t = new Task(task.id, task.name, task.description, task.day_id)
         console.log('Log 3 - Task Object = ');
-        console.log(t);
+        console.log(t);  
         t.renderTask(); 
     })
 } 
+
+function deleteTask(event) {
+let taskId = parseInt(event.target.dataset.id) 
+fetch('http://localhost:3000/tasks/${taskId}',{
+    method: 'DELETE'
+}) 
+}
+
+// function deleteTask (event) {
+//     let taskId = parseInt(event.target.dataset.id) 
+//     fetch('http://localhost:3000/tasks/${taskId}',{
+//     method: 'DELETE'
+//  })
+// }
+
+
+
+// let buttons = document.getElementsByClassName(".delete-button")
+// for (const button of buttons){
+//     button.addEventListener("click", () =>{
+//         debugger 
+//     })
+// }
+// console.log(buttons)
 //  function taskFormSubmission(event) {
 //      event.preventDefault(); 
 //      let name = document.getElementById("name").value
