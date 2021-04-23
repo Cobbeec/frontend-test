@@ -49,16 +49,18 @@ document.addEventListener("DOMContentLoaded", () => {
           }, 
         body: JSON.stringify(task) 
     })
-    .then(resp => resp.json()) 
+    .then(response => response.json()) 
     .then(task => {
-        response.data.forEach(el =>{
-        let t = new Task(el.attributes.id, el.attributes.name, el.attributes.description, el.attributes.day_id)
-        // let t = new Task(el.attributes)
-    })
-       console.log(task)
-        t.renderTask(); 
+        let t = new Task(task.id, task.name, task.description, task.day_id) 
+        t.renderTask();
     })
 } 
+
+
+// response.data.forEach(el =>{
+//     let t = new Task(el.attributes.id, el.attributes.name, el.attributes.description, el.attributes.day_id)
+//     // let t = new Task(el.attributes)
+//     task.attachtoDom(el)
 
 
 // function deleteTask(id){
