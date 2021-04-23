@@ -1,4 +1,5 @@
 class Task {
+    static all = [] 
 constructor(id, name, description, day_id) {
     this.id = id; 
     this.name = name; 
