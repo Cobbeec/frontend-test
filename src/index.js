@@ -92,10 +92,15 @@ function deleteTask () {
     let taskId = (event.target.dataset.id) 
     fetch(`http://localhost:3000/tasks/${taskId}`,{
     method: 'DELETE'
+    
+ }) 
+ .then(resp => resp.json()) 
+ .then(task => {alert(task.message)
  })
+this.location.reload() 
 }
 
-
+// add document.getElementById and remove put it inside of the task
 
 // let buttons = document.getElementsByClassName(".delete-button")
 // for (const button of buttons){
