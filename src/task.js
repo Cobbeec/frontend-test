@@ -5,6 +5,7 @@ constructor(id, name, description, day_id) {
     this.name = name; 
     this.description = description; 
     this.day_id = day_id 
+    Task.all.push(this) 
 
 }
 renderTask () {

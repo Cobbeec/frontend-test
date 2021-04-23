@@ -51,11 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(resp => resp.json()) 
     .then(task => {
-        console.log('Log 2 - Task Data From Response = ');
-        console.log(task);
         let t = new Task(task.id, task.name, task.description, task.day_id)
-        console.log('Log 3 - Task Object = ');
-        console.log(t);  
         t.renderTask(); 
     })
 } 
