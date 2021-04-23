@@ -90,8 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function deleteTask () {
     let taskId = (event.target.dataset.id) 
-    debugger; 
-    fetch('http://localhost:3000/tasks',{
+    fetch(`http://localhost:3000/tasks/${taskId}`,{
     method: 'DELETE'
  })
 }
