@@ -16,7 +16,7 @@ renderTask () {
 </li>
 
 </ul>
-<button class="delete-button" data-id=${this.id} onclick="deleteTask()">Delete Task</button> 
+<button class="delete-button" data-id=${this.id} onclick="deleteTask()">Delete</button>
 `
 }
 //rendertask is an instance method called on new instances you're making here

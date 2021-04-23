@@ -60,19 +60,41 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 } 
 
-function deleteTask(event) {
-let taskId = parseInt(event.target.dataset.id) 
-fetch('http://localhost:3000/tasks/${taskId}',{
-    method: 'DELETE'
-}) 
-}
 
-// function deleteTask (event) {
-//     let taskId = parseInt(event.target.dataset.id) 
-//     fetch('http://localhost:3000/tasks/${taskId}',{
-//     method: 'DELETE'
-//  })
+// function deleteTask(id){
+//     let configTask = {
+//         method: 'DELETE',
+//         headers: {
+//             "Content-Type": "application/json",
+//             Accept: "application/json"
+//         }
+//     }
+
+//     fetch(`http://localhost:3000/tasks/${id}`, configTask)
+//     .then(res => res.json())
+//     .then(json => {
+//         alert(json.message)
+//     })
+
+// // remove from dom
+//     let task = document.getElementById(`task-${id}`)
+//     task.remove()
 // }
+
+// function deleteTask(id) {
+//     let taskId = parseInt(id.data-id.id) 
+//     fetch('http://localhost:3000/tasks/${taskId}',{
+//         method: 'DELETE'
+//     }) 
+//     }
+
+function deleteTask () {
+    let taskId = (event.target.dataset.id) 
+    debugger; 
+    fetch('http://localhost:3000/tasks',{
+    method: 'DELETE'
+ })
+}
 
 
 
