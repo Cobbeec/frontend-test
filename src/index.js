@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchTasks() 
  })
  const BASE_URL = "http://127.0.0.1:3000/tasks" 
+ 
  function fetchTasks () {
     fetch(`${BASE_URL}`)
     .then(resp => resp.json())
@@ -14,6 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
  }
+
+ function addTasks(response){
+     response.data.forEach(item =>{
+        createForm(task)
+
+     })
+ }
+
  function createForm() {
     let tasksForm = document.getElementById ("tasks-form")
     tasksForm.innerHTML +=

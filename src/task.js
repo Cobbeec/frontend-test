@@ -5,13 +5,16 @@ constructor(id, name, description, day_id) {
     this.name = name; 
     this.description = description; 
     this.day_id = day_id 
+    this.taskList = document.getElementById(`task-list`)
     Task.all.push(this) 
 }
 
     attachtoDom() {
         console.log(this)
     }
-
+get taskList() {
+    return document.getElementById(`task-list`)
+}
 
 renderTask () {
     let tasksDiv = document.getElementById("tasks-container")
