@@ -5,7 +5,7 @@ constructor(id, name, description, day_id) {
     this.name = name; 
     this.description = description; 
     this.day_id = day_id 
-    this.taskList = document.getElementById(`task-list`)
+    // this.taskList = document.getElementById(`task-list`)
     Task.all.push(this) 
 }
 
@@ -14,6 +14,10 @@ constructor(id, name, description, day_id) {
     }
 get taskList() {
     return document.getElementById(`task-list`)
+}
+
+addEventListeners(){
+    this.element.addEventListener('click', this.handleListClick)
 }
 
 renderTask () {

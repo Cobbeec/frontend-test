@@ -1,3 +1,5 @@
+const daysAdapter = new DaysAdapter
+
 document.addEventListener("DOMContentLoaded", () => {
     createForm();
     fetchTasks() 
@@ -111,6 +113,15 @@ function deleteTask () {
 this.location.reload() 
 }
 
+// fetchDays()
+//     fetch(`http://localhost:3000/days`
+//     .then(response => response.json())
+//     .then(response =>{
+//         console.log(response)
+//     }
+
+
+
 // add document.getElementById and remove put it inside of the task
 
 // let buttons = document.getElementsByClassName(".delete-button")
@@ -168,5 +179,4 @@ this.location.reload()
 //        .then(task => {
 //            let t = new Task(task.id, task.name, task.description)
 //            t.renderTask(); 
-//        })
-
+//        
