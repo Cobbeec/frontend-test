@@ -6,14 +6,16 @@ class DaysAdapter{
     fetchDays(){
         fetch(this.baseUrl)
         .then(res => res.json())
-        .then(response => {
-            // console.log(response)
-            response.data.forEach(el => {
-                this.sanitizeAndInitializeDay(el)
-            })
-        })
-    }
+        .then(days => {
+        console.log(days)
+        for (const day of days) {
+            let d = new Day(day.date)
+            d.renderDay();
+        }
+    })
+ }
     sanitizeAndInitializeDay(data){
+        debugger; 
         let d = new Day({id: data.id, ...data.attributes})
         d.attachToDom()
     }
