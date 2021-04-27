@@ -3,7 +3,9 @@ const daysAdapter = new DaysAdapter
 document.addEventListener("DOMContentLoaded", () => {
     createForm();
     fetchTasks() 
+    daysAdapter.fetchDays() 
  })
+
  const BASE_URL = "http://127.0.0.1:3000/tasks" 
  
  function fetchTasks () {
