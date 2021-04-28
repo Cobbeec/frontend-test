@@ -4,16 +4,16 @@ class DaysAdapter{
     }
 
     fetchDays(){
-        fetch(this.baseUrl)
+        fetch(`http://localhost:3000/days`)
         .then(res => res.json())
         .then(days => {
         console.log(days)
         for (const day of days) {
             let d = new Day(day.date)
-            d.renderDay();
+            d.fullRender();
         }
     })
- }
+}
     sanitizeAndInitializeDay(data){
         debugger; 
         let d = new Day({id: data.id, ...data.attributes})

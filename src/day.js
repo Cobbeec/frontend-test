@@ -2,7 +2,8 @@ class Day {
 
     static all = []
 
-    constructor({date}) {
+    constructor(date) {
+        this.id 
         this.date = date
         this.element = document.createElement('li')
         this.dayList = document.getElementById('day-list')
@@ -15,16 +16,25 @@ attachToDom(){
 }
 
 
- renderDay () {
-    let daysDiv = document.getElementById("days-container")
-    
-    daysDiv.innerHTML +=
-`
-<ul>
-<li> Name: ${this.date} 
-</li>
-</ul>
-
-`
+fullRender(){
+    this.element.innerHTML = `
+    <h3>${this.name}</h3>
+    `
+    return this.element
 }
-}   
+} 
+
+
+//  renderDay () {
+//     let daysDiv = document.getElementById("days-container")
+    
+//     daysDiv.innerHTML +=
+// `
+// <ul>
+// <li> Name: ${this.date} 
+// </li>
+// </ul>
+
+// `
+// }
+// }  
