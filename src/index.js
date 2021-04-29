@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <form>
     Name: <input type="text" id="name">
     Description: <input type="text" id="description">
-   Day ID: <input type="integer" id="day_id">
+    Day ID: <input type="date" id="day_id">
     <input type="submit" value="Create Task">
     </form>
     `
