@@ -10,7 +10,7 @@ class DaysAdapter{
         console.log(days)
         for (const day of days) {
             let d = new Day(day.date)
-            d.fullRender();
+            d.attachToDom();
         }
     })
 }

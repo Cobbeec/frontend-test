@@ -15,10 +15,13 @@ attachToDom(){
     this.addEventListeners()
 }
 
+addEventListeners(){
+    this.element.addEventListener('click', this.displayTasks)
+}
 
 fullRender(){
     this.element.innerHTML = `
-    <h3>${this.name}</h3>
+    <h3>${this.date}</h3>
     `
     return this.element
 }
