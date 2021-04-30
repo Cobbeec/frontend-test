@@ -50,11 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
     <option> Saturday </option>
     <option> Sunday </option>
     </select> 
-    Day ID: <input type="date" id="day_id">
+    Day Id: <input type"integer" id="day_id">
     <input type="submit" value="Create Task"> 
     </form>
     `
   tasksForm.addEventListener("submit", taskFormSubmission)
+  debugger; 
   console.log()
  }
 
@@ -63,10 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let name = document.getElementById("name").value
     let description = document.getElementById("description").value 
     let day_id = document.getElementById("day_id").value 
+    let dayList = document.getElementById("dayList").value 
     let task = {
         name: name,
         description: description, 
-        day_id: day_id 
+        day_id: day_id ,
+        dayList: dayList
     }
     console.log('Log 1 - Task Data = ');
     console.log(task);
@@ -80,10 +83,11 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(response => response.json()) 
     .then(task => {
-        let t = new Task(task.id, task.name, task.description, task.day_id) 
+        let t = new Task(task.id, task.name, task.description, task.dayList) 
         t.renderTask();
     })
 } 
+
 
 function deleteTask () {
     let taskId = (event.target.dataset.id) 
