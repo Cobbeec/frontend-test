@@ -31,11 +31,22 @@ document.addEventListener("DOMContentLoaded", () => {
     let tasksForm = document.getElementById ("tasks-form")
     tasksForm.innerHTML +=
     `
+    <script>
+    <function dayselect(){
+        var daylist=document.getElementById("dayList"); 
+        document.getElementById("daytask").value=daylist.options[daylist.selectedIndex].text;
+    }
+    </script> 
     <form>
     Name: <input type="text" id="name">
     Description: <input type="text" id="description">
+    Select a day: 
+    <select id="dayList" onchange="dayselect()">
+    <option> Monday </option>
+    <option> Tuesday </option>
+    </select> 
     Day ID: <input type="date" id="day_id">
-    <input type="submit" value="Create Task">
+    <input type="submit" value="Create Task"> 
     </form>
     `
   tasksForm.addEventListener("submit", taskFormSubmission)
@@ -69,40 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 } 
 
-
-// response.data.forEach(el =>{
-//     let t = new Task(el.attributes.id, el.attributes.name, el.attributes.description, el.attributes.day_id)
-//     // let t = new Task(el.attributes)
-//     task.attachtoDom(el)
-
-
-// function deleteTask(id){
-//     let configTask = {
-//         method: 'DELETE',
-//         headers: {
-//             "Content-Type": "application/json",
-//             Accept: "application/json"
-//         }
-//     }
-
-//     fetch(`http://localhost:3000/tasks/${id}`, configTask)
-//     .then(res => res.json())
-//     .then(json => {
-//         alert(json.message)
-//     })
-
-// // remove from dom
-//     let task = document.getElementById(`task-${id}`)
-//     task.remove()
-// }
-
-// function deleteTask(id) {
-//     let taskId = parseInt(id.data-id.id) 
-//     fetch('http://localhost:3000/tasks/${taskId}',{
-//         method: 'DELETE'
-//     }) 
-//     }
-
 function deleteTask () {
     let taskId = (event.target.dataset.id) 
     fetch(`http://localhost:3000/tasks/${taskId}`,{
@@ -115,70 +92,82 @@ function deleteTask () {
 this.location.reload() 
 }
 
-// fetchDays()
-//     fetch(`http://localhost:3000/days`
-//     .then(response => response.json())
-//     .then(response =>{
-//         console.log(response)
+
+
+// sendPatchRequest(taskId)
+//     const name = document.getElementById(`update-name-${taskId}`).value
+//     const description = document.getElementById(`update-description-${taskId}`).value
+//     const day_id = document.getElementById(`update-day_id-${taskId}`).value
+
+//     let taskObj = {
+//         name, 
+//         description,
+//         day_id
 //     }
 
+//     let configObj = {
+//         method: 'PATCH',
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Accept": "application/json"
+//         },
+//         body: JSON.stringify(taskObj)
+//     }
 
-
-// add document.getElementById and remove put it inside of the task
-
-// let buttons = document.getElementsByClassName(".delete-button")
-// for (const button of buttons){
-//     button.addEventListener("click", () =>{
-//         debugger 
-//     })
-// }
-// console.log(buttons)
-//  function taskFormSubmission(event) {
-//      event.preventDefault(); 
-//      let name = document.getElementById("name").value
-//      let description = document.getElementById("description").value 
-//      let task = {
-//          name: name,
-//          description: description 
-//      }
-//      fetch('http://127.0.0.1:3000/tasks', {
-//          method: "POST", 
-//          headers: {
-//              'Accept': 'application/json',
-//              'Content-Type': 'application/json'
-//            }, 
-//          body: JSON.stringify(task) 
-//      })
+//     function updateTask () {
+//         let taskId = (event.target.dataset.id) 
+//         fetch(`http://localhost:3000/tasks/${taskId}`,{
+//         method: 'PATCH',
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Accept": "application/json"
+//         },
+//         body: JSON.stringify(itemObj)
+        
+//      }) 
 //      .then(resp => resp.json()) 
-//      .then(task => {
-//          let t = new Task(task.id, task.name, task.description)
-//          t.renderTask(); 
+//      .then(task => {alert(task.message)
 //      })
-//  } 
-//   let tasksForm = document.getElementById("tasks-form")
-//   tasksForm.addEventListener("submit", () => {
-//       debugger;
-//   }) 
-// } 
-//    let name = document.getElementById("name").value
-//    let description = document.getElementById("description").value
- 
-//    let task = {
-//        name: name,
-//        description: description,
- 
-//    }
- 
-//    fetch('${BASE_URL}/tasks',{
-//        method: "POST",
-//        headers: {
-//            'Accept': 'application/json',
-//            'Content-Type': 'application/json'
-//        },
-//        body: JSON.stringify(task)
-//    })
-//        .then(resp => resp.json())
-//        .then(task => {
-//            let t = new Task(task.id, task.name, task.description)
-//            t.renderTask(); 
-//        
+//     this.location.reload() 
+//     }
+    
+
+//     let form = document.getElementById(`update-form-${taskId}`)
+//     form.remove()
+
+
+
+
+// updateTaskOnDom({name, description, day_id}){
+//     this.name = name
+//     this.description = description
+//     this.day_id = day_id 
+//     this.renderTask()
+//     this.addEventListeners()
+// }
+
+// addUpdateTasklds(taskId){
+//     let task = document.querySelector(`#task-${taskId} li`)
+//     let updateForm = `
+//     <input type="text" value="${this.name}" name="name" id="update-name-${taskId}">
+//     <input type="text" name="description" value="${this.description}" id="update-description-${taskId}">
+//     <input type="date" name="day_id" value="${this.day_id}" id="update-day_id-${taskId}">
+//     `
+//     let formDiv = document.createElement('div')
+//     formDiv.id = `update-form-${taskId}`
+//     formDiv.innerHTML = updateForm
+//     task.append(formDiv)
+// }
+
+// handleListClick = (e) => {
+//     let id = e.target.dataset.id
+//       if(e.target.className === 'update'){
+//          e.target.className = "save"
+//          e.target.innerText = "Save"
+//          this.addUpdateTaskFields(id)
+//      } else if(e.target.className === 'save'){
+//          e.target.className = "update"
+//          e.target.innerText = "Update"
+//          Task.sendPatchRequest(id)
+//      }
+// }
