@@ -44,6 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
     <select id="dayList" onchange="dayselect()">
     <option> Monday </option>
     <option> Tuesday </option>
+    <option> Wednesday </option>
+    <option> Thursday </option>
+    <option> Friday </option>
+    <option> Saturday </option>
+    <option> Sunday </option>
     </select> 
     Day ID: <input type="date" id="day_id">
     <input type="submit" value="Create Task"> 
