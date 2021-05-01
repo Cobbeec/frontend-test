@@ -14,20 +14,18 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(tasks => {
         console.log(tasks)
         for (const task of tasks) {
-            let t = new Task(task.id, task.name, task.description, task.dayList )
+            let t = new Task(task.id, task.name, task.description )
             t.renderTask();
         }
     })
  }
- 
- //getting the info and then passing in the response
 
  function addTasks(response){
-     response.data.forEach(task =>{
+     response.data.forEach(item =>{
         createForm(task)
+
      })
  }
-//we are iterating over this array 
 
  function createForm() {
     let tasksForm = document.getElementById ("tasks-form")
@@ -57,9 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
     </form>
     `
   tasksForm.addEventListener("submit", taskFormSubmission)
+  debugger; 
   console.log()
  }
- //thhis handles our list click   
 
  function taskFormSubmission(event) {
     event.preventDefault(); 
@@ -170,3 +168,7 @@ handleListClick = (e) => {
      }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    // tasksAdapter.fetchTasks() 
+    daysAdapter.fetchDays() 
+ })
