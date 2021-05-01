@@ -14,18 +14,20 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(tasks => {
         console.log(tasks)
         for (const task of tasks) {
-            let t = new Task(task.id, task.name, task.description )
+            let t = new Task(task.id, task.name, task.description, task.dayList )
             t.renderTask();
         }
     })
  }
+ 
+ //getting the info and then passing in the response
 
  function addTasks(response){
-     response.data.forEach(item =>{
+     response.data.forEach(task =>{
         createForm(task)
-
      })
  }
+//we are iterating over this array 
 
  function createForm() {
     let tasksForm = document.getElementById ("tasks-form")
@@ -55,9 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
     </form>
     `
   tasksForm.addEventListener("submit", taskFormSubmission)
-  debugger; 
   console.log()
  }
+ //thhis handles our list click   
 
  function taskFormSubmission(event) {
     event.preventDefault(); 
@@ -101,82 +103,70 @@ function deleteTask () {
 this.location.reload() 
 }
 
+function addUpdateTaskFields(taskId){
+    let task = document.querySelector(`#task-${taskId} li`)
+    let name = task.querySelector('.name').innerText
+    let description = task.querySelector('.description').innerText
 
 
-// sendPatchRequest(taskId)
-//     const name = document.getElementById(`update-name-${taskId}`).value
-//     const description = document.getElementById(`update-description-${taskId}`).value
-//     const day_id = document.getElementById(`update-day_id-${taskId}`).value
+    let updateForm = `
+    <input type="text" value="${name}" name="name" id="update-name-${taskId}">
+    <input type="text" name="description" value="${description}" id="update-description-${taskId}">
+    `
 
-//     let taskObj = {
-//         name, 
-//         description,
-//         day_id
-//     }
-
-//     let configObj = {
-//         method: 'PATCH',
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept": "application/json"
-//         },
-//         body: JSON.stringify(taskObj)
-//     }
-
-//     function updateTask () {
-//         let taskId = (event.target.dataset.id) 
-//         fetch(`http://localhost:3000/tasks/${taskId}`,{
-//         method: 'PATCH',
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept": "application/json"
-//         },
-//         body: JSON.stringify(itemObj)
-        
-//      }) 
-//      .then(resp => resp.json()) 
-//      .then(task => {alert(task.message)
-//      })
-//     this.location.reload() 
-//     }
-    
-
-//     let form = document.getElementById(`update-form-${taskId}`)
-//     form.remove()
+    let formDiv = document.createElement('div')
+    formDiv.id = `update-form-${taskId}`
+    formDiv.innerHTML = updateForm
+    task.append(formDiv)
+}
 
 
+function sendPatchRequest(taskId){
+    const updateTaskName = document.getElementById(`update-name-${taskId}`)
+    const updateTaskDescription = document.getElementById(`update-description-${taskId}`)
+ 
 
+    let taskObj = {
+        name: updateTaskName.value,
+        description: updateTaskDescription.value,
+    }
 
-// updateTaskOnDom({name, description, day_id}){
-//     this.name = name
-//     this.description = description
-//     this.day_id = day_id 
-//     this.renderTask()
-//     this.addEventListeners()
-// }
+    let configObj = {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(taskObj)
+    }
 
-// addUpdateTasklds(taskId){
-//     let task = document.querySelector(`#task-${taskId} li`)
-//     let updateForm = `
-//     <input type="text" value="${this.name}" name="name" id="update-name-${taskId}">
-//     <input type="text" name="description" value="${this.description}" id="update-description-${taskId}">
-//     <input type="date" name="day_id" value="${this.day_id}" id="update-day_id-${taskId}">
-//     `
-//     let formDiv = document.createElement('div')
-//     formDiv.id = `update-form-${taskId}`
-//     formDiv.innerHTML = updateForm
-//     task.append(formDiv)
-// }
+    fetch(`http://localhost:3000/tasks/${taskId}`, configObj)
+    .then(res => res.json())
+    .then(response => updateTaskOnDom(response.data))
+    // remove form
+debugger; 
+    let form = document.getElementById(`update-form-${taskId}`)
+    form.remove()
+}
 
-// handleListClick = (e) => {
-//     let id = e.target.dataset.id
-//       if(e.target.className === 'update'){
-//          e.target.className = "save"
-//          e.target.innerText = "Save"
-//          this.addUpdateTaskFields(id)
-//      } else if(e.target.className === 'save'){
-//          e.target.className = "update"
-//          e.target.innerText = "Update"
-//          Task.sendPatchRequest(id)
-//      }
-// }
+function updateTaskOnDom(task){
+    let liTask = document.querySelector(`#task-${task.id} li`)
+    liTask.querySelector('.name').innerText = task.attributes.name
+    liTask.querySelector('.description').innerText = task.attributes.description
+}
+
+handleListClick = (e) => {
+    let id = e.target.dataset.id
+    if (e.target.className === "delete"){
+         Task.deleteTask(id)
+    } else if(e.target.className === 'update'){
+         e.target.className = "save"
+         e.target.innerText = "Save"
+         this.addUpdateTaskFields(id)
+     } else if(e.target.className === 'save'){
+         e.target.className = "update"
+         e.target.innerText = "Update"
+         Task.sendPatchRequest(id)
+     }
+}
+

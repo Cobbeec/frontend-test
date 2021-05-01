@@ -1,10 +1,11 @@
 class Task {
     static all = [] 
-constructor(id, name, description, day_id) {
+constructor(id, name, description, day_id, dayList) {
     this.id = id; 
     this.name = name; 
     this.description = description; 
-    this.day_id = day_id 
+    this.day_id = day_id; 
+    this.dayList = dayList 
     // this.taskList = document.getElementById(`task-list`)
     Task.all.push(this) 
 }
@@ -31,7 +32,7 @@ renderTask () {
 
 </ul>
 <button class="delete-button" data-id=${this.id} onclick="deleteTask()">Delete</button>
-<button class="update" data-id="${this.id}">Update</button>
+<button class="update" data-id="${this.id}onclick="updateTask()">Update</button>
 `
 }
 //rendertask is an instance method called on new instances you're making here

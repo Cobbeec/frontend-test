@@ -27,7 +27,7 @@ renderDay(){
 </ul>
 `
 }
-}
+
 
 // daySelect(){
 //     const dropdown = document.getElementById
@@ -45,26 +45,20 @@ renderDay(){
 //     this.element.addEventListener('click', this.displayTasks)
 // }
 
-// fullRender(){
-//     this.element.innerHTML = `
-//     <h3>${this.date}</h3>
-//     `
-//     return this.element
-// }
 
-// get tasks(){
-//     return Task.all.filter(i => i.day_id == this.id)
-// }
+get tasks(){
+    return Task.all.filter(i => i.dayList == this.id)
+}
 
-// static find(id){
-//     return Day.all.find(d => d.id == id)
-// }
+static find(id){
+    return Day.all.find(d => d.id == id)
+}
 
-// sortedTasks(){
-//     return this.tasks.sort((a,b) => a.date - b.date)
-// }
+sortedTasks(){
+    return this.tasks.sort((a,b) => a.name - b.name)
+}
 
-// } 
+} 
 
 
 //  renderDay () {
