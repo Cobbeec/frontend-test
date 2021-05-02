@@ -6,7 +6,7 @@ class DaysAdapter{
     fetchDays(){
         fetch(`http://localhost:3000/days`)
         .then(res => res.json())
-        .then(days => {
+        .then(days => {  
         console.log(days)
         for (const day of days) {
             let d = new Day(day.id, day.name) 

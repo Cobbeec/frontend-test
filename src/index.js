@@ -1,4 +1,5 @@
 const daysAdapter = new DaysAdapter
+const updateForm = document.getElementById('update-form')
 
 document.addEventListener("DOMContentLoaded", () => {
     createForm();

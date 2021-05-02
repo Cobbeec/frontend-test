@@ -10,6 +10,7 @@ constructor(id, name, description, day_id, dayList) {
     Task.all.push(this) 
 }
 
+
     attachtoDom() {
         console.log(this)
     }
@@ -17,9 +18,16 @@ get taskList() {
     return document.getElementById(`task-list`)
 }
 
-addEventListeners(){
+updateTaskOnDom({name, description}){
+    this.name = name
+    this.description = description
+    this.name = name 
+    this.renderTask()
+    this.addEventListeners()
+addEventListeners()
     this.element.addEventListener('click', this.handleListClick)
 }
+
 
 renderTask () {
     let tasksDiv = document.getElementById("tasks-container")
@@ -32,10 +40,23 @@ renderTask () {
 
 </ul>
 <button class="delete-button" data-id=${this.id} onclick="deleteTask()">Delete</button>
-<button class="update" data-id="${this.id}onclick="updateTask()">Update</button>
+<button class="update-button" data-id="${this.id}">Update</button>
 `
 }
 //rendertask is an instance method called on new instances you're making here
 
 
+static findById(id){
+    return Task.all.find(task => task.id == id)
 }
+
+addEventListeners(){
+    this.element.addEventListener('click', this.handleListClick)
+
+
+}
+
+get taskList(){
+    return document.getElementById('task-list')
+}
+} 
