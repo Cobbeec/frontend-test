@@ -60,3 +60,18 @@ get taskList(){
     return document.getElementById('task-list')
 }
 } 
+
+handleListClick = (e) => {
+    let id = e.target.dataset.id
+    if (e.target.className === "delete"){
+         Task.deleteTask(id)
+    } else if(e.target.className === 'update'){
+         e.target.className = "save"
+         e.target.innerText = "Save"
+         this.addUpdateTaskFields(id)
+     } else if(e.target.className === 'save'){
+         e.target.className = "update"
+         e.target.innerText = "Update"
+         Task.sendPatchRequest(id)
+     }
+}
