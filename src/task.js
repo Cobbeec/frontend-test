@@ -42,7 +42,7 @@ renderTask () {
 
 </ul>
 <button class="delete-button" data-id=${this.id} onclick="deleteTask()">Delete</button>
-<button class="update-button" data-id="${this.id} onclick="updateTask()">Update</button>
+<button class="update-button" data-id=${this.id} onclick="updateTask()">Update</button>
 `
 }
 } 

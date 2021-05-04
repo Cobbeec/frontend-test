@@ -103,8 +103,7 @@ this.location.reload()
 }
 
 
-function updateTask () {
-    debugger; 
+function updateTask (event) {
     let taskId = (event.target.dataset.id) 
     fetch(`http://localhost:3000/tasks/${taskId}`,{
         method: 'PATCH',
@@ -117,6 +116,7 @@ body: JSON.stringify(task)
 .then(response => response.json()) 
 .then(response => response.json())
 .then(json => console.log(json))
+// debugger; 
 } 
 
 // }
