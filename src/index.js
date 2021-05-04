@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(tasks)
         for (const task of tasks) {
             let t = new Task(task.id, task.name, task.description )
-            t.renderTask();
+            t.attachtoDom();
         }
     })
  }
@@ -103,7 +103,9 @@ this.location.reload()
 }
 
 
-function updateTask (event) {
+function updateTask () {
+    //appendupdate form to DOM
+    console.log("insideupdatetask")
     let taskId = (event.target.dataset.id) 
     fetch(`http://localhost:3000/tasks/${taskId}`,{
         method: 'PATCH',
@@ -114,23 +116,32 @@ function updateTask (event) {
 body: JSON.stringify(task) 
 })
 .then(response => response.json()) 
-.then(response => response.json())
 .then(json => console.log(json))
 // debugger; 
 } 
 
 // }
 
-// function addUpdateTaskFields(taskId){
-//     let task = document.querySelector(`#task-${taskId} li`)
-//     let name = task.querySelector('.name').innerText
-//     let description = task.querySelector('.description').innerText
+function addUpdateTaskFields(taskId){
+    debugger
+    let task = document.getElementById(`task-${taskId}`)
+    //add a debugger here and fix 
+    // let name = task.querySelector('.name').innerText
+    // let description = task.querySelector('.description').innerText
 
 
-//     let updateForm = `
-//     <input type="text" value="${name}" name="name" id="update-name-${taskId}">
-//     <input type="text" name="description" value="${description}" id="update-description-${taskId}">
-//     `
+    task.innerHTML += `
+    <form>
+    <input type="text" value="${name}" name="name" id="update-name-${taskId}">
+    <input type="text" name="description" value="${description}" id="update-description-${taskId}">
+    <input type="submit" value="Update Task"> 
+    </form> 
+    `
+    task.append(updateForm)
+}
+
+//submit this form, move patch request which updates your backend 
+//then grab that id and update it. 
 
 //     let formDiv = document.createElement('div')
 //     formDiv.id = `update-form-${taskId}`

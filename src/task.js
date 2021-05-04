@@ -13,9 +13,10 @@ constructor(id, name, description, day_id, dayList) {
 
 attachtoDom() {
         console.log(this)
+        this.taskList.append(this.renderTask())
     }
 get taskList() {
-    return document.getElementById(`task-list`)
+    return document.getElementById(`tasks-container`)
 }
 
 updateTaskOnDom({name, description}){
@@ -32,9 +33,9 @@ addEventListeners()
 
 
 renderTask () {
-    let tasksDiv = document.getElementById("tasks-container")
+    // let tasksDiv = document.getElementById("tasks-container")
     
-    tasksDiv.innerHTML +=
+    this.element.innerHTML +=
 `
 <ul>
 <li> Name: ${this.name} - Description: ${this.description}
@@ -42,8 +43,9 @@ renderTask () {
 
 </ul>
 <button class="delete-button" data-id=${this.id} onclick="deleteTask()">Delete</button>
-<button class="update-button" data-id=${this.id} onclick="updateTask()">Update</button>
+<button class="update-button" data-id=${this.id} onclick="addUpdateTaskFields(${this.id})">Update</button>
 `
+return this.element 
 }
 } 
 
