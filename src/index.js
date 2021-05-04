@@ -1,5 +1,6 @@
 const daysAdapter = new DaysAdapter
 const updateForm = document.getElementById('update-form')
+const tasks = new Task 
 
 document.addEventListener("DOMContentLoaded", () => {
     createForm();
@@ -56,7 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
     </form>
     `
   tasksForm.addEventListener("submit", taskFormSubmission)
-  debugger; 
   console.log()
  }
 
@@ -102,57 +102,76 @@ function deleteTask () {
 this.location.reload() 
 }
 
-function addUpdateTaskFields(taskId){
-    let task = document.querySelector(`#task-${taskId} li`)
-    let name = task.querySelector('.name').innerText
-    let description = task.querySelector('.description').innerText
 
-
-    let updateForm = `
-    <input type="text" value="${name}" name="name" id="update-name-${taskId}">
-    <input type="text" name="description" value="${description}" id="update-description-${taskId}">
-    `
-
-    let formDiv = document.createElement('div')
-    formDiv.id = `update-form-${taskId}`
-    formDiv.innerHTML = updateForm
-    task.append(formDiv)
-}
-
-
-function sendPatchRequest(taskId){
-    const updateTaskName = document.getElementById(`update-name-${taskId}`)
-    const updateTaskDescription = document.getElementById(`update-description-${taskId}`)
- 
-
-    let taskObj = {
-        name: updateTaskName.value,
-        description: updateTaskDescription.value,
-    }
-
-    let configObj = {
+function updateTask () {
+    debugger; 
+    let taskId = (event.target.dataset.id) 
+    fetch(`http://localhost:3000/tasks/${taskId}`,{
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
-        body: JSON.stringify(taskObj)
-    }
+body: JSON.stringify(task) 
+})
+.then(response => response.json()) 
+.then(response => response.json())
+.then(json => console.log(json))
+} 
 
-    fetch(`http://localhost:3000/tasks/${taskId}`, configObj)
-    .then(res => res.json())
-    .then(response => updateTaskOnDom(response.data))
-    // remove form
-debugger; 
-    let form = document.getElementById(`update-form-${taskId}`)
-    form.remove()
-}
+// }
 
-function updateTaskOnDom(task){
-    let liTask = document.querySelector(`#task-${task.id} li`)
-    liTask.querySelector('.name').innerText = task.attributes.name
-    liTask.querySelector('.description').innerText = task.attributes.description
-}
+// function addUpdateTaskFields(taskId){
+//     let task = document.querySelector(`#task-${taskId} li`)
+//     let name = task.querySelector('.name').innerText
+//     let description = task.querySelector('.description').innerText
+
+
+//     let updateForm = `
+//     <input type="text" value="${name}" name="name" id="update-name-${taskId}">
+//     <input type="text" name="description" value="${description}" id="update-description-${taskId}">
+//     `
+
+//     let formDiv = document.createElement('div')
+//     formDiv.id = `update-form-${taskId}`
+//     formDiv.innerHTML = updateForm
+//     task.append(formDiv)
+// }
+
+
+// function sendPatchRequest(taskId){
+//     const updateTaskName = document.getElementById(`update-name-${taskId}`)
+//     const updateTaskDescription = document.getElementById(`update-description-${taskId}`)
+ 
+
+//     let taskObj = {
+//         name: updateTaskName.value,
+//         description: updateTaskDescription.value,
+//     }
+
+//     let configObj = {
+//         method: 'PATCH',
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Accept": "application/json"
+//         },
+//         body: JSON.stringify(taskObj)
+//     }
+
+//     fetch(`http://localhost:3000/tasks/${taskId}`, configObj)
+//     .then(res => res.json())
+//     .then(response => updateTaskOnDom(response.data))
+//     // remove form
+// debugger; 
+//     let form = document.getElementById(`update-form-${taskId}`)
+//     form.remove()
+// }
+
+// function updateTaskOnDom(task){
+//     let liTask = document.querySelector(`#task-${task.id} li`)
+//     liTask.querySelector('.name').innerText = task.attributes.name
+//     liTask.querySelector('.description').innerText = task.attributes.description
+// }
 
 // handleListClick = (e) => {
 //     let id = e.target.dataset.id
@@ -169,7 +188,7 @@ function updateTaskOnDom(task){
 //      }
 // }
 
-document.addEventListener("DOMContentLoaded", () => {
-    // tasksAdapter.fetchTasks() 
-    daysAdapter.fetchDays() 
- })
+// document.addEventListener("DOMContentLoaded", () => {
+//     this.addUpdateTaskFields() 
+//     daysAdapter.fetchDays() 
+//  })

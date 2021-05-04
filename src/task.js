@@ -6,12 +6,12 @@ constructor(id, name, description, day_id, dayList) {
     this.description = description; 
     this.day_id = day_id; 
     this.dayList = dayList 
-    // this.taskList = document.getElementById(`task-list`)
+    this.element = document.createElement('div')
+    this.element.id = `task-${this.id}`
     Task.all.push(this) 
 }
 
-
-    attachtoDom() {
+attachtoDom() {
         console.log(this)
     }
 get taskList() {
@@ -24,8 +24,10 @@ updateTaskOnDom({name, description}){
     this.name = name 
     this.renderTask()
     this.addEventListeners()
+
 addEventListeners()
     this.element.addEventListener('click', this.handleListClick)
+    this.element.addEventListener('click', this.update)
 }
 
 
@@ -40,38 +42,56 @@ renderTask () {
 
 </ul>
 <button class="delete-button" data-id=${this.id} onclick="deleteTask()">Delete</button>
-<button class="update-button" data-id="${this.id}">Update</button>
+<button class="update-button" data-id="${this.id} onclick="updateTask()">Update</button>
 `
-}
-//rendertask is an instance method called on new instances you're making here
-
-
-static findById(id){
-    return Task.all.find(task => task.id == id)
-}
-
-addEventListeners(){
-    this.element.addEventListener('click', this.handleListClick)
-
-
-}
-
-get taskList(){
-    return document.getElementById('task-list')
 }
 } 
 
-handleListClick = (e) => {
-    let id = e.target.dataset.id
-    if (e.target.className === "delete"){
-         Task.deleteTask(id)
-    } else if(e.target.className === 'update'){
-         e.target.className = "save"
-         e.target.innerText = "Save"
-         this.addUpdateTaskFields(id)
-     } else if(e.target.className === 'save'){
-         e.target.className = "update"
-         e.target.innerText = "Update"
-         Task.sendPatchRequest(id)
-     }
-}
+// handleListClick = (e) => {
+//     let id = e.target.dataset.id
+//     if (e.target.className === 'update'){
+//          e.target.className = "save"
+//          e.target.innerText = "Save"
+//          this.addUpdateTaskFields(id)
+//      } else if(e.target.className === 'save'){
+//          e.target.className = "update"
+//          e.target.innerText = "Update"
+//          Task.sendPatchRequest(id)
+//      }
+
+//rendertask is an instance method called on new instances you're making here
+
+// updateFunction() {
+//     document.getElementById("update-button").onclick = Bar(); 
+// }
+
+
+// static findById(id){
+//     return Task.all.find(task => task.id == id)
+// }
+
+// addEventListeners(){
+//     this.element.addEventListener('click', this.handleListClick)
+//     this.element.addEventListener('click', this.update)
+
+// }
+
+// get taskList(){
+//     return document.getElementById('task-list')
+// }
+
+
+// handleListClick = (e) => {
+//     let id = e.target.dataset.id
+//     if (e.target.className === "delete"){
+//          Task.deleteTask(id)
+//     } else if(e.target.className === 'update'){
+//          e.target.className = "save"
+//          e.target.innerText = "Save"
+//          this.addUpdateTaskFields(id)
+//      } else if(e.target.className === 'save'){
+//          e.target.className = "update"
+//          e.target.innerText = "Update"
+//          Task.sendPatchRequest(id)
+//      }
+// }
