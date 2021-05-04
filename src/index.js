@@ -113,8 +113,8 @@ function addUpdateTaskFields(taskId){
 
     task.innerHTML += `
     <form>
-    <input type="text" value="${name}" name="name" id="update-name-${taskId}">
-    <input type="text" name="description" value="${description}" id="update-description-${taskId}">
+    Name: <input type="text" value="${name}" name="name" id="update-name-${taskId}">
+    Description: <input type="text" name="description" value="${description}" id="update-description-${taskId}">
     <input type="submit" value="Update Task"> 
     </form> 
     `
