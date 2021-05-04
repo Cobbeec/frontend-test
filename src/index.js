@@ -103,25 +103,6 @@ this.location.reload()
 }
 
 
-function updateTask () {
-    //appendupdate form to DOM
-    console.log("insideupdatetask")
-    let taskId = (event.target.dataset.id) 
-    fetch(`http://localhost:3000/tasks/${taskId}`,{
-        method: 'PATCH',
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-body: JSON.stringify(task) 
-})
-.then(response => response.json()) 
-.then(json => console.log(json))
-// debugger; 
-} 
-
-// }
-
 function addUpdateTaskFields(taskId){
     debugger
     let task = document.getElementById(`task-${taskId}`)
@@ -138,6 +119,32 @@ function addUpdateTaskFields(taskId){
     </form> 
     `
     task.append(updateForm)
+}
+
+function updateTask () {
+    //appendupdate form to DOM
+    console.log("insideupdatetask")
+    let taskId = (event.target.dataset.id) 
+    fetch(`http://localhost:3000/tasks/${taskId}`,{
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+body: JSON.stringify(task) 
+})
+.then(response => response.json()) 
+.then(json => console.log(json))
+// debugger; 
+for (const task of tasks) {
+    let t = new Task(task.id, task.name, task.description )
+    t.updateTaskonDom();
+}
+} 
+function updateTaskOnDom(task){
+    let liTask = document.querySelector(`#task-${task.id} li`)
+    liTask.querySelector('.name').innerText = task.attributes.name
+    liTask.querySelector('.description').innerText = task.attributes.description
 }
 
 //submit this form, move patch request which updates your backend 
