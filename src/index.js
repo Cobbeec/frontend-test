@@ -113,34 +113,39 @@ function addUpdateTaskFields(taskId){
 
     task.innerHTML += `
     <form>
-    Name: <input type="text" value="${name}" name="name" id="update-name-${taskId}">
-    Description: <input type="text" name="description" value="${description}" id="update-description-${taskId}">
+    Name: <input type="text" value="${taskId.name}" name="name" id="update-name-${taskId}">
+    Description: <input type="text" value="${taskId.description}" name="description" id="update-description-${taskId}">
     <input type="submit" value="Update Task"> 
     </form> 
-    `
+    `    
     task.append(updateForm)
+    updateForm.addEventListener("submit", updateFormSubmission)
+    console.log("didthiswork?")
 }
 
-function updateTask () {
+
+ 
+
+function sendPatchRequest(taskId) {
     //appendupdate form to DOM
     console.log("insideupdatetask")
-    let taskId = (event.target.dataset.id) 
+    // let taskId = (event.target.dataset.id) 
     fetch(`http://localhost:3000/tasks/${taskId}`,{
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
-body: JSON.stringify(task) 
+body: JSON.stringify(taskId) 
 })
 .then(response => response.json()) 
 .then(json => console.log(json))
 // debugger; 
-for (const task of tasks) {
-    let t = new Task(task.id, task.name, task.description )
+let t = Task.all.find(i => i.id == response.data.attributes.id)
+item.updateItemOnDom(response.data.attributes)
     t.updateTaskonDom();
 }
-} 
+ 
 function updateTaskOnDom(task){
     let liTask = document.querySelector(`#task-${task.id} li`)
     liTask.querySelector('.name').innerText = task.attributes.name
