@@ -105,6 +105,8 @@ this.location.reload()
 
 function addUpdateTaskFields(taskId){
     let task = document.getElementById(`task-${taskId}`)
+    let name = document.getElementById("name").value
+    let description = document.getElementById("description").value 
 
     task.innerHTML += `
     <form id="update-form-${taskId}">
@@ -117,22 +119,24 @@ function addUpdateTaskFields(taskId){
     updateForm.addEventListener("submit", updateFormSubmission)
   
 }
-function updateFormSubmission(){
-    let taskId = (event.target.dataset.id) 
+function updateFormSubmission(event){ 
     event.preventDefault(); 
-    let name = document.getElementById("name").value
-    let description = document.getElementById("description").value 
-    let task = {
-        name: name, 
-        description: description 
+     let taskId = (event.target.dataset.id) 
+    const name = document.getElementById(`update-name-${taskId}`).value
+    const description = document.getElementById(`update-description-${taskId}`).value 
+    
+    let taskObj = {
+        name, 
+        description 
     }
+
     fetch(`http://localhost:3000/tasks/${taskId}`,{
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
-body: JSON.stringify(taskId) 
+body: JSON.stringify(taskObj) 
 })
 .then(response => response.json()) 
 .then(json => console.log(json))
