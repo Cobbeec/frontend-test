@@ -117,7 +117,8 @@ function addUpdateTaskFields(taskId){
     updateForm.addEventListener("submit", updateFormSubmission)
   
 }
-function updateFormSubmission(taskId){
+function updateFormSubmission(){
+    let taskId = (event.target.dataset.id) 
     event.preventDefault(); 
     let name = document.getElementById("name").value
     let description = document.getElementById("description").value 
@@ -125,13 +126,6 @@ function updateFormSubmission(taskId){
         name: name, 
         description: description 
     }
-
-
-// function sendPatchRequest(taskId) {
-//     //appendupdate form to DOM
-//     debugger; 
-//     console.log("insideupdatetask")
-    // let taskId = (event.target.dataset.id) 
     fetch(`http://localhost:3000/tasks/${taskId}`,{
         method: 'PATCH',
         headers: {
@@ -145,7 +139,8 @@ body: JSON.stringify(taskId)
 debugger; 
 let t = Task.all.find(i => i.id == response.data.attributes.id)
 task.updateTaskOnDom(response.data.attributes)
-    t.updateTaskonDom();
+    t.updateTaskonDom()
+    t.renderTask();
 }
  
 function updateTaskOnDom(task){
