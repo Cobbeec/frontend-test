@@ -1,5 +1,5 @@
 const daysAdapter = new DaysAdapter
-const updateForm = document.getElementById('update-form')
+// const updateForm = document.getElementById('update-form')
 const tasks = new Task 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -104,31 +104,33 @@ this.location.reload()
 
 
 function addUpdateTaskFields(taskId){
-    debugger
     let task = document.getElementById(`task-${taskId}`)
-    //add a debugger here and fix 
-    // let name = task.querySelector('.name').innerText
-    // let description = task.querySelector('.description').innerText
-
 
     task.innerHTML += `
-    <form>
+    <form id="update-form-${taskId}">
     Name: <input type="text" value="${taskId.name}" name="name" id="update-name-${taskId}">
     Description: <input type="text" value="${taskId.description}" name="description" id="update-description-${taskId}">
     <input type="submit" value="Update Task"> 
     </form> 
-    `    
-    task.append(updateForm)
+    `  
+    let updateForm = document.getElementById(`update-form-${taskId}`)
     updateForm.addEventListener("submit", updateFormSubmission)
-    console.log("didthiswork?")
+  
 }
+function updateFormSubmission(taskId){
+    event.preventDefault(); 
+    let name = document.getElementById("name").value
+    let description = document.getElementById("description").value 
+    let task = {
+        name: name, 
+        description: description 
+    }
 
 
- 
-
-function sendPatchRequest(taskId) {
-    //appendupdate form to DOM
-    console.log("insideupdatetask")
+// function sendPatchRequest(taskId) {
+//     //appendupdate form to DOM
+//     debugger; 
+//     console.log("insideupdatetask")
     // let taskId = (event.target.dataset.id) 
     fetch(`http://localhost:3000/tasks/${taskId}`,{
         method: 'PATCH',
@@ -140,9 +142,9 @@ body: JSON.stringify(taskId)
 })
 .then(response => response.json()) 
 .then(json => console.log(json))
-// debugger; 
+debugger; 
 let t = Task.all.find(i => i.id == response.data.attributes.id)
-item.updateItemOnDom(response.data.attributes)
+task.updateTaskOnDom(response.data.attributes)
     t.updateTaskonDom();
 }
  
